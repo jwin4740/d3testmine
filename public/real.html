@@ -12,31 +12,31 @@
         body {
             background-color: lightgray;
         }
-        
+
         .axis path,
         .axis line {
             fill: none;
             stroke: #000;
             shape-rendering: crispEdges;
         }
-        
+
         .dot {
             stroke: #000;
         }
-        
+
         .tooltip {
             position: absolute;
             width: 200px;
             height: 28px;
             pointer-events: none;
         }
-        
+
         svg {
             border: solid 2px black;
             margin: 25px;
             font: 11px sans-serif;
         }
-        
+
         .label {
             font-weight: bolder;
             font-size: 12px;
@@ -53,6 +53,31 @@
             </div>
         </div>
         <script>
+            var algorithmsArray = ["Logistic Regression", "Random Forest", "Gradient Boosting", "Naive Bayes"];
+            var parsedArray = [];
+            // constructor function for points
+            function Point(algorithm, tpr, fpr, color) {
+                this.algorithm = algorithm;
+                this.tpr = tpr;
+                this.fpr = fpr;
+                color = function () {
+                    switch (algorithm) {
+                        case algorithmsArray[0]:
+                            return "blue";
+                            break;
+                        case algorithmsArray[1]:
+                            return "red";
+                            break;
+                        case algorithmsArray[2]:
+                            return "green";
+                            break;
+                        case algorithmsArray[3]:
+                            return "black";
+                            break;
+                    }
+                }
+
+            }
             let tempo;
             var margin = {
                     top: 20,
@@ -71,32 +96,32 @@
              */
 
             // setup x 
-            var xValue = function(d) {
+            var xValue = function (d) {
                     console.log(d);
                     tempo = d;
                     return tempo;
                 }, // data -> value
                 xScale = d3.scale.linear().range([0, width]), // value -> display
 
-                xMap = function(d) {
+                xMap = function (d) {
                     console.log(tempo);
                     return xScale(tempo);
                 }, // data -> display
                 xAxis = d3.svg.axis().scale(xScale).orient("bottom");
 
             // setup y
-            var yValue = function(d) {
+            var yValue = function (d) {
                     return d;
                 }, // data -> value
                 yScale = d3.scale.linear().range([height, 0]), // value -> display
-                yMap = function(d) {
+                yMap = function (d) {
                     let yRet = yScale(yValue())
                     return yScale(yValue(0.25));
                 }, // data -> display
                 yAxis = d3.svg.axis().scale(yScale).orient("left");
 
             // setup fill color
-            var cValue = function(d) {
+            var cValue = function (d) {
                     return d.Manufacturer;
                 },
                 color = d3.scale.category10();
@@ -114,7 +139,7 @@
                 .style("opacity", 0);
 
             // // load data
-            d3.json("sample.json", function(error, data) {
+            d3.json("sample.json", function (error, data) {
                 console.log(data);
                 //     // change string (from CSV) into number format
                 //     data.forEach(function(d) {
@@ -123,7 +148,7 @@
                 //         console.log(d);
                 //     });
 
-                console.log(typeof(data.fpr[0]));
+                console.log(typeof (data.fpr[0]));
                 console.log(d3.min(data.fpr, xValue));
                 var xDom = [d3.min(data.fpr, xValue), d3.max(data.fpr, xValue)];
                 var yDom = [d3.min(data.tpr, yValue), d3.max(data.tpr, yValue)];
