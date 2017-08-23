@@ -1,0 +1,10 @@
+div.jumbotron {
+    text-align: center;
+    background-image: url("../images/white-house-logo.jpg");
+
+}
+
+.liquidFillGaugeText {
+    font-family: Helvetica;
+    font-weight: bold;
+}

@@ -1,0 +1,233 @@
+body {
+    color: white;
+    background-color: black;
+    font-family: 'Karla', sans-serif;
+}
+
+.totustuus {
+    width: 100%;
+}
+
+#mainHeader {
+    color: yellow;
+    margin-bottom: 20px;
+}
+
+hr {
+    border-color: #003366;
+}
+
+.panel-default {
+    border: solid 3px #003366;
+    background-color: transparent;
+    border-radius: 0px;
+    margin-bottom: 0px;
+}
+
+.panel-default>.panel-heading {
+    background-color: yellow;
+    padding: 5px;
+    border-bottom: solid 3px #003366;
+    border-radius: 0px;
+}
+
+.panel-default>.panel-body {
+    background-color: transparent;
+}
+
+.mainCol {
+    height: 775px;
+    background-color: black;
+    background-color: transparent;
+}
+
+.rightCol {
+    height: 475px;
+    background-color: black;
+    background-color: transparent;
+}
+
+.titleAlign {
+    text-align: left;
+    font-weight: bolder;
+}
+
+.panel-body {
+    padding: 0px;
+}
+
+svg {
+    padding 10px;
+}
+
+.firstChartPanel {
+    padding: 10px 10px 5px 10px;
+}
+
+.barChart {
+    padding-left: 10px;
+}
+
+.xaxisWhite text {
+    fill: white;
+}
+
+.yaxisWhite text {
+    fill: white;
+}
+
+.xaxisWhite line {
+    stroke: white;
+}
+
+.yaxisWhite line {
+    stroke: white;
+}
+
+.xaxisWhite path {
+    stroke: white;
+}
+
+.yaxisWhite path {
+    stroke: white;
+}
+
+.pad {
+    padding: 10px;
+}
+
+.axis text {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.x.axis path {
+    display: none;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    padding: 2px;
+    font: 9px sans-serif;
+    background: red;
+    color: white border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.tHead {
+    float: left;
+    background-color: yellow;
+    border-bottom: solid 3px #003366;
+    border-left: solid 1px #003366;
+    color: black;
+    font-weight: bolder;
+    margin-top: 0px;
+    padding: 6px 6px 7px 6px;
+    margin-bottom: 5px;
+}
+
+.tAssetHeadLeft {
+    width: 40%;
+}
+
+.tAssetHeadCenter {
+    width: 25%;
+    border-right: solid 2px grey;
+    border-left: solid 2px grey;
+}
+
+.tAssetHeadRight {
+    width: 35%;
+}
+
+.assetBin {
+    font-size: 13px;
+    color: deepskyblue;
+}
+
+.tAsset {
+    clear: both;
+    margin-left: 5px;
+    padding: 2px;
+    margin-bottom: 4px;
+}
+
+.symbol {
+    margin-left: 50px;
+    color: white;
+}
+
+.assetValue {
+    margin-left: 40px;
+}
+
+.bankrupt {
+    margin-left: 38px;
+    color: red;
+}
+
+.redVal {
+    color: red;
+}
+
+.greenVal {
+    color: lawngreen;
+}
+
+.bar {
+    fill: blue;
+}
+
+.bar:hover {
+    fill: red;
+}
+
+.axis--x path {
+    display: none;
+}
+
+line.link {
+    stroke: white;
+    stroke-width: 1;
+    stroke-opacity: 0.6;
+}
+
+.nodes circle {
+    stroke: #fff;
+    stroke-width: 1.5px;
+}
+
+.forceCircle {
+    cursor: pointer;
+}
+
+div.container.nav-container {
+    margin-bottom: 0;
+}
+
+.nav-container {
+    width: inherit;
+    margin-bottom: 0;
+}
+
+.opaque-navbar {
+    background-color: rgba(0, 0, 0, 0.5);
+    /*Transparent = rgba(0,0,0,0) / Translucent = (0,0,0,0.5)*/
+    height: 60px;
+    border-bottom: 0px;
+    transition: background-color .5s ease 0s;
+    z-index: 20;
+    font-family: 'Cinzel', serif;
+    color: white;
+    !important;
+}

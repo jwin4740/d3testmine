@@ -1,0 +1,334 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+/*this is the background image*/
+
+div.container.nav-container {
+    margin-bottom: 0;
+}
+
+body.body {
+    background-image: url("../images/stripes.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+/*background-image for jumbotron*/
+
+div.jumbotron {
+    background-image: url("../images/stars.jpg");
+    /*add picture of postage stamp and Trump here*/
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+
+/*Trump stamp with 45cent in right hand corner*/
+
+div.stamp {
+    width: 400px;
+    height: 400px;
+    padding: 10px;
+    background: #fff;
+    background: radial-gradient(transparent, transparent 7px, white 7px, white);
+    background-size: 20px 20px;
+    background-position: -9px -9px;
+    -webkit-filter: drop-shadow(0 0 10px rgba(0, 0, 0, .5));
+    margin: auto;
+}
+
+.relative {
+    position: relative;
+}
+
+p.absolute-text {
+    display: inline-block;
+    position: absolute;
+    color: #fff;
+    margin: 10px 10px 0 0;
+    font: bold 50px Georgia, "Times New Roman", Times, serif;
+    top: 0px;
+    right: 8px;
+    font-size: 45px;
+}
+
+
+/*Trump Stuff Title*/
+
+h1 {
+    font-family: 'Luckiest Guy', cursive !important;
+    color: red !important;
+    text-shadow: 3px 2px white;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-delay: 4s;
+    -webkit-animation-iteration-count: 3;
+}
+
+
+/*Sign-up and Login Buttons*/
+
+button.btn.btn-primary.btn-lg {
+    background-color: transparent;
+    -moz-border-radius: 42px;
+    -webkit-border-radius: 42px;
+    border-radius: 42px;
+    border: 1px solid #fcfcfc;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    padding: 11px 16px;
+    text-decoration: none;
+    text-shadow: -1px 1px 3px #000000;
+}
+
+button.btn.btn-primary.btn-lg:hover {
+    background-color: transparent;
+}
+
+button.btn.btn-primary.btn-lg:active {
+    text-shadow: #1e4158 0 1px 0;
+    border: 2px solid #0a3c59;
+    background: #65a9d7;
+    background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#3e779d));
+    background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+    background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+    background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+    background: -o-linear-gradient(top, #3e779d, #65a9d7);
+    background-image: -ms-linear-gradient(top, #3e779d 0%, #65a9d7 100%);
+    color: #fff;
+}
+
+
+/*fill gauge*/
+
+
+/*svg#fillgauge2 {
+    background-color: black;
+}*/
+
+
+/*Modal body and buttons*/
+
+.modal-body {
+    padding: 7px;
+}
+
+button.btn.btn-primary.btn-lg:focus {
+    outline: 0;
+}
+
+.dropdown-item a:hover {
+    background-color: #94a0ed
+}
+
+#pass {
+    font-size: 12px;
+}
+
+.nav-container {
+    width: inherit;
+    margin-bottom: 0;
+}
+
+
+/* Show the dropdown menu on hover */
+
+.dropdown:hover .dropdown-item {
+    display: block;
+}
+
+
+/*modal decoration. We made the modal opaque here. The higher the number the less opaque*/
+
+div.modal-form-group,
+div.modal-dialog {
+    width: 320px;
+}
+
+div.modal-content {
+    background-color: darkgray;
+    opacity: .9;
+    width: 320px;
+}
+
+.form-field:focus {
+    background: #fff;
+    color: #000000;
+}
+
+.form-container h2 {
+    text-shadow: #050300 0 1px 0;
+    font-size: 18px;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form-title {
+    margin-bottom: 10px;
+    color: #fcfcfc;
+    text-shadow: #050300 0 1px 0;
+}
+
+.submit-container {
+    margin: 8px 0;
+    text-align: right;
+}
+
+
+/* STRUCTURE */
+
+#pagewrap {
+    padding: 5px;
+    width: 960px;
+    margin: 0px auto;
+    background-color: #D8D5C9;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+header {
+    height: 100px;
+    padding: 0 15px;
+    text-align: center;
+    background-color: #767570;
+}
+
+section#content {
+    width: 270px;
+    float: left;
+    padding: 5px 15px;
+    margin: 0px 0px 0px 6px;
+    text-align: center;
+    /*background-color: #D8D5C9 !important;*/
+    background: rgba(0, 0, 0, 0.4);
+    font-family: 'Cinzel', serif;
+    color: white;
+}
+
+section#middle {
+    width: 375px;
+    height: 714px;
+    /* Account for margins + border values - was seet to 294*/
+    height: 714px;
+    float: left;
+    padding: 27px 15px;
+    margin: 0px 10px 5px 10px;
+    text-align: center;
+    /*background-color:#D8D5C9;*/
+    background: rgba(0, 0, 0, 0.4);
+    font-family: 'Cinzel', serif;
+    color: white;
+}
+
+aside#sidebar {
+    width: 270px;
+    padding: 5px 15px;
+    float: left;
+    text-align: center;
+    /*background-color: #D8D5C9 !important;*/
+    background: rgba(0, 0, 0, 0.4);
+    font-family: 'Cinzel', serif;
+    color: white;
+}
+
+.panel-body,
+.quote-label {
+    /*text-align: center;*/
+    background-color: #D8D5C9 !important;
+    color: #000000;
+}
+
+.quote {
+    font-weight: bold;
+}
+
+footer {
+    clear: both;
+    padding: 0 15px;
+    background-color: #D8D5C9;
+}
+
+.opaque-navbar {
+    background-color: rgba(0, 0, 0, 0.5);
+    /*Transparent = rgba(0,0,0,0) / Translucent = (0,0,0,0.5)*/
+    height: 60px;
+    border-bottom: 0px;
+    transition: background-color .5s ease 0s;
+    z-index: 20;
+    font-family: 'Cinzel', serif;
+    color: white;
+    !important;
+}
+
+
+/************************************************************************************
+MEDIA QUERIES
+*************************************************************************************/
+
+
+/* for 980px or less */
+
+@media screen and (max-width: 980px) {
+    #pagewrap {
+        width: 94%;
+    }
+    #content {
+        width: 41%;
+        padding: 1% 4%;
+    }
+    #middle {
+        width: 41%;
+        padding: 1% 4%;
+        margin: 0px 0px 5px 5px;
+        float: right;
+    }
+    #sidebar {
+        clear: both;
+        padding: 1% 4%;
+        width: auto;
+        float: none;
+    }
+    header,
+    footer {
+        padding: 1% 4%;
+    }
+}
+
+
+/* for 700px or less */
+
+@media screen and (max-width: 600px) {
+    #content {
+        width: auto;
+        float: none;
+    }
+    #middle {
+        width: auto;
+        float: none;
+        margin-left: 0px;
+    }
+    #sidebar {
+        width: auto;
+        float: none;
+    }
+}
+
+
+/* for 480px or less */
+
+@media screen and (max-width: 480px) {
+    header {
+        height: auto;
+    }
+    /*h1 {
+		font-size: 2em;
+	}*/
+    #sidebar {
+        display: none;
+    }
+}
