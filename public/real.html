@@ -6,40 +6,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="libraries/d3-v3.js"></script>
+    <!-- <script src="libraries/d3-v4.js"></script> -->
     <link href="libraries/bootstrap.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     <style>
         body {
             background-color: lightgray;
         }
-
+        
         .axis path,
         .axis line {
             fill: none;
             stroke: #000;
             shape-rendering: crispEdges;
         }
-
+        
         .dot {
             stroke: #000;
         }
-
+        
         .tooltip {
             position: absolute;
             width: 200px;
             height: 28px;
             pointer-events: none;
         }
-
+        
         svg {
             border: solid 2px black;
             margin: 25px;
             font: 11px sans-serif;
         }
-
+        
         .label {
             font-weight: bolder;
             font-size: 12px;
+        }
+        
+        g.legend {
+            margin-top: 20px;
         }
     </style>
 
@@ -53,40 +58,43 @@
             </div>
         </div>
         <script>
+            function findColor(algorithm) {
+                switch (algorithm) {
+                    case algorithmsArray[0]:
+                        return "blue";
+                        break;
+                    case algorithmsArray[1]:
+                        return "red";
+                        break;
+                    case algorithmsArray[2]:
+                        return "green";
+                        break;
+                    case algorithmsArray[3]:
+                        return "black";
+                        break;
+                }
+            }
             var algorithmsArray = ["Logistic Regression", "Random Forest", "Gradient Boosting", "Naive Bayes"];
             var parsedArray = [];
             // constructor function for points
-            function Point(algorithm, tpr, fpr, color) {
+            function Point(algorithm, tpr, fpr) {
                 this.algorithm = algorithm;
                 this.tpr = tpr;
                 this.fpr = fpr;
-                color = function () {
-                    switch (algorithm) {
-                        case algorithmsArray[0]:
-                            return "blue";
-                            break;
-                        case algorithmsArray[1]:
-                            return "red";
-                            break;
-                        case algorithmsArray[2]:
-                            return "green";
-                            break;
-                        case algorithmsArray[3]:
-                            return "black";
-                            break;
-                    }
-                }
+                this.color = findColor(this.algorithm);
 
             }
+            var pointy = new Point(algorithmsArray[0], 0.976, 0.365);
+            console.log(pointy);
             let tempo;
             var margin = {
-                    top: 20,
-                    right: 20,
-                    bottom: 30,
-                    left: 40
+                    top: 30,
+                    right: 30,
+                    bottom: 40,
+                    left: 50
                 },
-                width = 600 - margin.left - margin.right,
-                height = 350 - margin.top - margin.bottom;
+                width = 680 - margin.left - margin.right,
+                height = 450 - margin.top - margin.bottom;
 
             /* 
              * value accessor - returns the value to encode for a given data object.
@@ -96,36 +104,32 @@
              */
 
             // setup x 
-            var xValue = function (d) {
-                    console.log(d);
-                    tempo = d;
-                    return tempo;
+            var xValue = function(d) {
+                    return d.fpr;
                 }, // data -> value
                 xScale = d3.scale.linear().range([0, width]), // value -> display
 
-                xMap = function (d) {
-                    console.log(tempo);
-                    return xScale(tempo);
+                xMap = function(d) {
+
+                    return xScale(xValue(d));
                 }, // data -> display
                 xAxis = d3.svg.axis().scale(xScale).orient("bottom");
 
             // setup y
-            var yValue = function (d) {
-                    return d;
+            var yValue = function(d) {
+                    return d.tpr;
                 }, // data -> value
                 yScale = d3.scale.linear().range([height, 0]), // value -> display
-                yMap = function (d) {
-                    let yRet = yScale(yValue())
-                    return yScale(yValue(0.25));
+                yMap = function(d) {
+                    return yScale(yValue(d));
                 }, // data -> display
                 yAxis = d3.svg.axis().scale(yScale).orient("left");
 
             // setup fill color
-            var cValue = function (d) {
-                    return d.Manufacturer;
-                },
-                color = d3.scale.category10();
-
+            var cValue = function(d) {
+                return d.algorithm;
+            };
+            color = d3.scale.category10();
             // add the graph canvas to the body of the webpage
             var svg = d3.select("body").append("svg")
                 .attr("width", width + margin.left + margin.right)
@@ -139,19 +143,29 @@
                 .style("opacity", 0);
 
             // // load data
-            d3.json("sample.json", function (error, data) {
-                console.log(data);
-                //     // change string (from CSV) into number format
-                //     data.forEach(function(d) {
-                //         d.fpr = +d.fpr; // x axis
-                //         d.tpr = +d.tpr; //y axis
-                //         console.log(d);
-                //     });
+            d3.json("sample.json", function(error, data) {
+                for (var key in data) {
+                    console.log(key);
+                    var qObject = data[key];
+                    console.log(qObject);
+                    var len = qObject["tpr"].length;
+                    console.log(len);
+                    for (var i = 0; i < len; i++) { // x is first tpr then fpr
+                        var tempTrue = qObject["tpr"][i];
+                        var tempFalse = qObject["fpr"][i];
 
-                console.log(typeof (data.fpr[0]));
-                console.log(d3.min(data.fpr, xValue));
-                var xDom = [d3.min(data.fpr, xValue), d3.max(data.fpr, xValue)];
-                var yDom = [d3.min(data.tpr, yValue), d3.max(data.tpr, yValue)];
+
+                        var pointy = new Point(key, tempTrue, tempFalse);
+                        parsedArray.push(pointy);
+
+                    }
+                }
+                console.log(parsedArray);
+
+
+
+                var xDom = [d3.min(parsedArray, xValue) - 0.05, d3.max(parsedArray, xValue) + 0.05];
+                var yDom = [d3.min(parsedArray, yValue) - 0.05, d3.max(parsedArray, yValue) + 0.05];
                 console.log(xDom);
                 console.log(yDom);
                 xScale.domain(xDom);
@@ -184,53 +198,55 @@
 
                 // draw dots
                 svg.selectAll(".dot")
-                    .data(data)
+                    .data(parsedArray)
                     .enter().append("circle")
                     .attr("class", "dot")
-                    .attr("r", 3.5)
+                    .attr("r", 3.25)
                     .attr("cx", xMap)
                     .attr("cy", yMap)
-                    .style("fill", "red");
-                // .on("mouseover", function(d) {
-                //         tooltip.transition()
-                //             .duration(200)
-                //             .style("opacity", .9);
-                //         tooltip.html(d["Cereal Name"] + "<br/> (" + xValue(d) +
-                //                 ", " + yValue(d) + ")")
-                //             .style("left", (d3.event.pageX + 5) + "px")
-                //             .style("top", (d3.event.pageY - 28) + "px");
-                //     })
-                //     .on("mouseout", function(d) {
-                //         tooltip.transition()
-                //             .duration(500)
-                //             .style("opacity", 0);
-                //     });
+                    .style("fill", function(d) {
+                        return color(cValue(d));
+                    })
+                    .on("mouseover", function(d) {
+                        tooltip.transition()
+                            .duration(200)
+                            .style("opacity", .9);
+                        tooltip.html(d.algorithm + "<br/> (" + xValue(d) +
+                                ", " + yValue(d) + ")")
+                            .style("left", (d3.event.pageX + 5) + "px")
+                            .style("top", (d3.event.pageY - 28) + "px");
+                    })
+                    .on("mouseout", function(d) {
+                        tooltip.transition()
+                            .duration(500)
+                            .style("opacity", 0);
+                    });
 
-                //     // draw legend
-                //     var legend = svg.selectAll(".legend")
-                //         .data(color.domain())
-                //         .enter().append("g")
-                //         .attr("class", "legend")
-                //         .attr("transform", function(d, i) {
-                //             return "translate(0," + i * 20 + ")";
-                //         });
+                // draw legend
+                var legend = svg.selectAll(".legend")
+                    .data(color.domain())
+                    .enter().append("g")
+                    .attr("class", "legend")
+                    .attr("transform", function(d, i) {
+                        return "translate(0," + (i * 20 + 200) + ")";
+                    });
 
-                //     // draw legend colored rectangles
-                //     legend.append("rect")
-                //         .attr("x", width - 18)
-                //         .attr("width", 18)
-                //         .attr("height", 18)
-                //         .style("fill", color);
+                // draw legend colored rectangles
+                legend.append("rect")
+                    .attr("x", width - 18)
+                    .attr("width", 18)
+                    .attr("height", 18)
+                    .style("fill", color);
 
-                //     // draw legend text
-                //     legend.append("text")
-                //         .attr("x", width - 24)
-                //         .attr("y", 9)
-                //         .attr("dy", ".35em")
-                //         .style("text-anchor", "end")
-                //         .text(function(d) {
-                //             return d;
-                //         })
+                // draw legend text
+                legend.append("text")
+                    .attr("x", width - 24)
+                    .attr("y", 9)
+                    .attr("dy", ".35em")
+                    .style("text-anchor", "end")
+                    .text(function(d) {
+                        return d;
+                    })
             });
         </script>
     </body>

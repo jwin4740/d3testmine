@@ -18,6 +18,19 @@ module.exports = function(app) {
         res.sendFile(path.join(__dirname, "../public/index.html"));
     });
 
+    app.get("/scatter", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/scatterTemplate.html"));
+    });
+
+    app.get("/line", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/lineTemplate.html"));
+    });
+
+    app.get("/realline", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/realLine.html"));
+    });
+
+
     app.get("/real", function(req, res) {
         res.sendFile(path.join(__dirname, "../public/real.html"));
     });
