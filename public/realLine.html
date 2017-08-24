@@ -13,13 +13,19 @@
         /* set the CSS */
         
         body {
-            font: 12px Arial;
+            background-color: lightgray;
         }
         
         path {
             stroke: steelblue;
             stroke-width: 2;
             fill: none;
+        }
+        
+        svg {
+            border: solid 2px black;
+            margin: 25px;
+            font: 11px sans-serif;
         }
         
         .axis path,
@@ -35,11 +41,24 @@
             font-weight: bold;
             text-anchor: middle;
         }
+        
+        .label {
+            font-weight: bolder;
+            font-size: 12px;
+        }
     </style>
 
 </head>
 
 <body>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong><h2 class="panel-title">D3 Graph Test</h2></strong>
+        </div>
+        <div class="panel-body">
+            Multiline graph
+        </div>
+    </div>
     <script>
         function findColor(algorithm) {
             switch (algorithm) {
@@ -71,12 +90,12 @@
         // Set the dimensions of the canvas / graph
         var margin = {
                 top: 30,
-                right: 20,
-                bottom: 70,
+                right: 30,
+                bottom: 40,
                 left: 50
             },
-            width = 600 - margin.left - margin.right,
-            height = 300 - margin.top - margin.bottom;
+            width = 680 - margin.left - margin.right,
+            height = 450 - margin.top - margin.bottom;
 
         // Parse the date / time
 
@@ -156,8 +175,8 @@
             console.log(algorithmsArray.length);
 
 
-            var xDom = [d3.min(parsedArray, xValue), d3.max(parsedArray, xValue)];
-            var yDom = [d3.min(parsedArray, yValue), d3.max(parsedArray, yValue)];
+            var xDom = [d3.min(parsedArray, xValue) - 0.05, d3.max(parsedArray, xValue) + 0.05];
+            var yDom = [d3.min(parsedArray, yValue) - 0.05, d3.max(parsedArray, yValue) + 0.05];
             console.log(xDom);
             console.log(yDom);
             xScale.domain(xDom);
@@ -176,7 +195,7 @@
                     .attr("class", "line")
                     .attr("stroke-width", "2")
                     .style("stroke", graphColorsArray[i])
-                    .attr("d", drawLine(parsedArray, parsedArray[i].algorithm));
+                    .attr("d", drawLine(parsedArray, algorithmsArray[i]));
 
             }
 
@@ -203,6 +222,32 @@
                 .attr("dy", ".71em")
                 .style("text-anchor", "end")
                 .text("TRUE POSITIVE RATE");
+
+            // draw legend
+            var legend = svg.selectAll(".legend")
+                .data(color.domain())
+                .enter().append("g")
+                .attr("class", "legend")
+                .attr("transform", function(d, i) {
+                    return "translate(0," + (i * 20 + 200) + ")";
+                });
+
+            // draw legend colored rectangles
+            legend.append("rect")
+                .attr("x", width - 18)
+                .attr("width", 18)
+                .attr("height", 18)
+                .style("fill", color);
+
+            // draw legend text
+            legend.append("text")
+                .attr("x", width - 24)
+                .attr("y", 9)
+                .attr("dy", ".35em")
+                .style("text-anchor", "end")
+                .text(function(d) {
+                    return d;
+                })
 
 
         });

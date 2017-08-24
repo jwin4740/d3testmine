@@ -22,6 +22,14 @@ module.exports = function(app) {
         res.sendFile(path.join(__dirname, "../public/scatterTemplate.html"));
     });
 
+    app.get("/bar", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/barSample.html"));
+    });
+
+    app.get("/barreal", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/barReal.html"));
+    });
+
     app.get("/line", function(req, res) {
         res.sendFile(path.join(__dirname, "../public/lineTemplate.html"));
     });
